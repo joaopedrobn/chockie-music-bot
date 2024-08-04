@@ -120,7 +120,7 @@ class Music(commands.Cog):
                 self.logger.info("Bot desconectado do canal de voz.")
                 await self.safe_send(ctx, "Todas as músicas da fila foram tocadas. Desconectando do canal de voz.")
 
-    @commands.command(name="play", help="Toca uma música ou playlist do YouTube")
+    @commands.command(name="play", aliases=["p"], help="Toca uma música ou playlist do YouTube")
     async def play(self, ctx, *, query):
         guild_data = self.get_guild_data(ctx.guild.id)
         if 'playlist' in query:
@@ -137,7 +137,7 @@ class Music(commands.Cog):
         if not guild_data['is_playing']:
             await self.play_song(ctx)
 
-    @commands.command(name="skip", help="Pula para a próxima música na fila")
+    @commands.command(name="skip", aliases=["s"], help="Pula para a próxima música na fila")
     async def skip(self, ctx):
         guild_data = self.get_guild_data(ctx.guild.id)
 
@@ -148,7 +148,7 @@ class Music(commands.Cog):
         else:
             await self.safe_send(ctx, "Nenhuma música está sendo tocada no momento.")
 
-    @commands.command(name="queue", help="Mostra a fila de músicas")
+    @commands.command(name="queue", aliases=["q"], help="Mostra a fila de músicas")
     async def queue_(self, ctx):
         guild_data = self.get_guild_data(ctx.guild.id)
         retval = "\n".join([f"{idx + 1}. {song['title']}" for idx, song in enumerate(guild_data['queue'])])
@@ -162,7 +162,7 @@ class Music(commands.Cog):
         else:
             await self.safe_send(ctx, "A fila está vazia.")
 
-    @commands.command(name="leave", help="Desconecta o bot do canal de voz")
+    @commands.command(name="leave", aliases=["l"], help="Desconecta o bot do canal de voz")
     async def leave(self, ctx):
         guild_data = self.get_guild_data(ctx.guild.id)
         guild_data['queue'] = []
@@ -171,7 +171,7 @@ class Music(commands.Cog):
             self.logger.info("Bot desconectado do canal de voz.")
             await self.safe_send(ctx, "Bot desconectado do canal de voz.")
 
-    @commands.command(name="pause", help="Pausa a música atual")
+    @commands.command(name="pause", aliases=["pa"], help="Pausa a música atual")
     async def pause(self, ctx):
         guild_data = self.get_guild_data(ctx.guild.id)
         if guild_data['voice_client'] and guild_data['voice_client'].is_playing():
@@ -181,7 +181,7 @@ class Music(commands.Cog):
         else:
             await self.safe_send(ctx, "Nenhuma música está sendo tocada no momento.")
 
-    @commands.command(name="resume", help="Retoma a música atual")
+    @commands.command(name="resume", aliases=["r"], help="Retoma a música atual")
     async def resume(self, ctx):
         guild_data = self.get_guild_data(ctx.guild.id)
         if guild_data['voice_client'] and guild_data['voice_client'].is_paused():
@@ -191,7 +191,7 @@ class Music(commands.Cog):
         else:
             await self.safe_send(ctx, "Nenhuma música está pausada no momento.")
 
-    @commands.command(name="volume", help="Ajusta o volume da música")
+    @commands.command(name="volume", aliases=["v"], help="Ajusta o volume da música")
     async def volume(self, ctx, volume: int):
         guild_data = self.get_guild_data(ctx.guild.id)
         guild_data['volume'] = volume / 100
@@ -199,7 +199,7 @@ class Music(commands.Cog):
             guild_data['voice_client'].source.volume = guild_data['volume']
         await self.safe_send(ctx, f"Volume ajustado para {volume}%.")
 
-    @commands.command(name="loop", help="Alterna o modo de repetição")
+    @commands.command(name="loop", aliases=["lp"], help="Alterna o modo de repetição")
     async def loop(self, ctx):
         guild_data = self.get_guild_data(ctx.guild.id)
         guild_data['loop'] = not guild_data['loop']
