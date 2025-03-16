@@ -101,7 +101,3 @@ O bot agora está ativo e pronto para receber comandos no seu servidor Discord. 
 ## 🤝 Contribuição
 
 Contribuições são bem-vindas! 💡 Sinta-se à vontade para abrir issues e pull requests.
-
-## 📜 Licença
-
-Este projeto está licenciado sob a Licença MIT. 📄 Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
