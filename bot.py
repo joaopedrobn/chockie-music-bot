@@ -5,22 +5,22 @@ from music import Music
 import os
 from dotenv import load_dotenv
 
-# Carregar variáveis de ambiente do arquivo .env
+
 load_dotenv()
 
-# Configuração de logs
+
 logging.basicConfig(level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 logger = logging.getLogger(__name__)
 
 intents = discord.Intents.default()
 intents.message_content = True
-intents.voice_states = True  # Necessário para gerenciar conexões de voz
+intents.voice_states = True
 
 bot = commands.Bot(command_prefix='ck!', intents=intents)
 
 @bot.event
 async def on_ready():
-    await bot.add_cog(Music(bot))  # Adicionando o cog de forma assíncrona
+    await bot.add_cog(Music(bot))
     logger.info(f'Bot conectado como {bot.user}')
 
 @bot.event
@@ -33,7 +33,7 @@ async def on_command_error(ctx, error):
 import os
 os.system("ffmpeg -version")
 
-# Carregar as variáveis de ambiente
+
 load_dotenv()
 
 DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')

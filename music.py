@@ -15,11 +15,13 @@ class Music(commands.Cog):
 
         # Definindo opções do yt_dlp
         self.ydl_opts = {
-       'format': 'bestaudio/best',
-       'noplaylist': 'True',
-       'quiet': True,
-       'cookiesfrombrowser': 'chrome'
-   }
+        'format': 'bestaudio/best',
+        'noplaylist': 'True',
+        'quiet': True,
+        'cookiefile': 'cookies.txt',  # Especificando o caminho do arquivo de cookies
+        'default_search': 'ytsearch',
+        'max_downloads': 1
+        }
 
         self.ffmpeg_options = {
             'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
