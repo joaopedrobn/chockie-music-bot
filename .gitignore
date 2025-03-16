@@ -1,2 +1,5 @@
 venv/
 .env
+coockies.txt
+discloud.config
+Dockerfile

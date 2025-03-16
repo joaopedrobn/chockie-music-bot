@@ -29,7 +29,16 @@ async def on_command_error(ctx, error):
         await ctx.send("Comando não encontrado.")
     else:
         raise error
+    
+import os
+os.system("ffmpeg -version")
 
-# Iniciando o bot com o token a partir da variável de ambiente
+# Carregar as variáveis de ambiente
+load_dotenv()
+
 DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
+
+if not DISCORD_TOKEN:
+    raise ValueError("ERRO: O DISCORD_TOKEN não foi encontrado!")
+
 bot.run(DISCORD_TOKEN)

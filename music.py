@@ -15,10 +15,11 @@ class Music(commands.Cog):
 
         # Definindo opções do yt_dlp
         self.ydl_opts = {
-            'format': 'bestaudio/best',
-            'noplaylist': 'True',
-            'quiet': True,
-        }
+       'format': 'bestaudio/best',
+       'noplaylist': 'True',
+       'quiet': True,
+       'cookiesfrombrowser': 'chrome'
+   }
 
         self.ffmpeg_options = {
             'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
@@ -88,7 +89,11 @@ class Music(commands.Cog):
                 guild_data['voice_client'] = ctx.voice_client
 
             # Definindo o volume e iniciando a reprodução
-            source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(m_url, **self.ffmpeg_options))
+            source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(
+            m_url,
+            before_options="-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5 -nostdin",
+            options="-vn"
+            ))
             source.volume = guild_data['volume']
             guild_data['voice_client'].play(source, after=lambda e: self.bot.loop.create_task(self.play_next(ctx)))
 
